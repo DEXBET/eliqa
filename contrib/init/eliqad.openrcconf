@@ -1,0 +1,26 @@
+# /etc/conf.d/eliqad: config file for /etc/init.d/eliqad
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/eliqa/eliqa.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/eliqad"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/eliqad.pid"
+
+# Where to write eliqad data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/eliqad"
+
+# User and group to own eliqad process
+#BITCOIND_USER="eliqa"
+#BITCOIND_GROUP="eliqa"
+
+# Path to eliqad executable
+#BITCOIND_BIN="/usr/bin/eliqad"
+
+# Nice value to run eliqad under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""

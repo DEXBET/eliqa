@@ -1,0 +1,26 @@
+[Unit]
+Description=ELIQA's distributed currency daemon
+After=network.target
+
+[Service]
+User=eliqa
+Group=eliqa
+
+Type=forking
+PIDFile=/var/lib/eliqad/eliqad.pid
+
+ExecStart=/usr/bin/eliqad -daemon -pid=/var/lib/eliqad/eliqad.pid \
+          -conf=/etc/eliqa/eliqa.conf -datadir=/var/lib/eliqad
+
+ExecStop=-/usr/bin/eliqa-cli -conf=/etc/eliqa/eliqa.conf \
+         -datadir=/var/lib/eliqad stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

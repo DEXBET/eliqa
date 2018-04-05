@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Eliqa
+Comment=Eliqa P2P Cryptocurrency
+Comment[fr]=Eliqa, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Eliqa, eşten eşe kriptografik sanal para birimi
+Exec=eliqa-qt %u
+Terminal=false
+Type=Application
+Icon=eliqa128
+MimeType=x-scheme-handler/eliqa;
+Categories=Office;Finance;
