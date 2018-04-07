@@ -803,8 +803,21 @@ std::string CBudgetManager::GetRequiredPaymentsString(int nBlockHeight)
 
 CAmount CBudgetManager::GetTotalBudget(int nHeight)
 {
-    return 0;
-}
+    if (Params().NetworkID() == CBaseChainParams::MAIN) return 0;
+    
+    if (chainActive.Tip() == NULL) return 0;
+
+    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
+        CAmount nSubsidy = 500 * COIN;
+        return ((nSubsidy / 100) * 10) * 146;
+    }
+
+    //get block value and calculate from that
+    CAmount nSubsidy = GetBlockValue(nHeight);
+
+    // Amount of blocks in a months period of time (using 1 minutes per) = (60*24*30)
+    return ((nSubsidy / 100) * 10) * 1440 * 30;
+ }
 
 void CBudgetManager::NewBlock()
 {
