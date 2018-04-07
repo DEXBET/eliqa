@@ -111,6 +111,7 @@ public:
         nMasternodeCountDrift = 20;
         nModifierUpdateBlock = 1;
         nMaxMoneyOut = 1000000000 * COIN;
+        nMasternodeColleteral = 350000;
 
         const char* pszTimestamp = "Each day you generate a random idiom - 4/04/2018";
         CMutableTransaction txNew;

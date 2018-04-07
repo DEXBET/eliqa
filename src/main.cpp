@@ -1612,13 +1612,13 @@ int64_t GetBlockValue(int nHeight)
     }
 
     // Lucky blocks 1MN
-    if ( nHeight == 69120 // 48                 
-            || nHeight == 155520 // 108                 
-            || nHeight == 243000 // 168 
-            || nHeight == 338688 // 235 
-            || nHeight == 525600 // 365 
+    if ( nHeight == 69120 // 48 day
+            || nHeight == 155520 // 108 day
+            || nHeight == 243000 // 168 day
+            || nHeight == 338688 // 235 day
+            || nHeight == 525600 // 365 day
         ) {
-        nSubsidy = 350000;
+        nSubsidy = Params().MasternodeColleteral(); // 350000
     }
 
 

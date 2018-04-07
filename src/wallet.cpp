@@ -1457,13 +1457,13 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
                 if (nCoinType == ONLY_DENOMINATED) {
                     found = IsDenominatedAmount(pcoin->vout[i].nValue);
                 } else if (nCoinType == ONLY_NOT5000IFMN) {
-                    found = !(fMasterNode && pcoin->vout[i].nValue == 350000 * COIN);
+                    found = !(fMasterNode && pcoin->vout[i].nValue == Params().MasternodeColleteral() * COIN);
                 } else if (nCoinType == ONLY_NONDENOMINATED_NOT5000IFMN) {
                     if (IsCollateralAmount(pcoin->vout[i].nValue)) continue; // do not use collateral amounts
                     found = !IsDenominatedAmount(pcoin->vout[i].nValue);
-                    if (found && fMasterNode) found = pcoin->vout[i].nValue != 350000 * COIN; // do not use Hot MN funds
+                    if (found && fMasterNode) found = pcoin->vout[i].nValue != Params().MasternodeColleteral() * COIN; // do not use Hot MN funds
                 } else if (nCoinType == ONLY_5000) {
-                    found = pcoin->vout[i].nValue == 350000 * COIN;
+                    found = pcoin->vout[i].nValue == Params().MasternodeColleteral() * COIN;
                 } else {
                     found = true;
                 }
@@ -1803,7 +1803,7 @@ bool CWallet::SelectCoinsByDenominations(int nDenom, CAmount nValueMin, CAmount 
 
     BOOST_FOREACH (const COutput& out, vCoins) {
         // masternode-like input should not be selected by AvailableCoins now anyway
-        //if(out.tx->vout[out.i].nValue == 350000*COIN) continue;
+        //if(out.tx->vout[out.i].nValue == Params().MasternodeColleteral()*COIN) continue;
         if (nValueRet + out.tx->vout[out.i].nValue <= nValueMax) {
             bool fAccepted = false;
 
@@ -1893,7 +1893,7 @@ bool CWallet::SelectCoinsDark(CAmount nValueMin, CAmount nValueMax, std::vector<
         if (out.tx->vout[out.i].nValue < CENT) continue;
         //do not allow collaterals to be selected
         if (IsCollateralAmount(out.tx->vout[out.i].nValue)) continue;
-        if (fMasterNode && out.tx->vout[out.i].nValue == 350000 * COIN) continue; //masternode input
+        if (fMasterNode && out.tx->vout[out.i].nValue == Params().MasternodeColleteral() * COIN) continue; //masternode input
 
         if (nValueRet + out.tx->vout[out.i].nValue <= nValueMax) {
             CTxIn vin = CTxIn(out.tx->GetHash(), out.i);
